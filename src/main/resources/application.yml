@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://localhost:3306/tierlist?serverTimezone=Asia/Seoul"
+    username: "root"
+    password: "0000"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
