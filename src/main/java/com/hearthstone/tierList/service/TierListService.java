@@ -2,30 +2,34 @@ package com.hearthstone.tierList.service;
 
 import com.hearthstone.tierList.domain.User;
 import com.hearthstone.tierList.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
-import org.springframework.stereotype.Service;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class TierListService {
+    private final UserRepository userRepository;
 
-    @Autowired
-    UserRepository userRepository;
+    public Page<User> allPages(Integer pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber - 1,25);
+        return userRepository.findAll(pageable);
+    }
+
+    public Page<User> searchTagUserData(String battleTag, Integer pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber - 1,25);
+        Page<User> searchTags = userRepository.findByBattleTagContaining(battleTag,pageable);
+        return searchTags;
+    }
+
     public void callTierList() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\yuteacher\\Desktop\\chromedriver-win64\\chromedriver.exe"); // chromedriver 경로 설정
 
@@ -34,9 +38,9 @@ public class TierListService {
 
             try {
 
-                String url = "https://hearthstone.blizzard.com/ko-kr/community/leaderboards/?region=AP&leaderboardId=arena&seasonId=42&page=";
+                String url = "https://hearthstone.blizzard.com/ko-kr/community/leaderboards/?region=AP&leaderboardId=arena&seasonId=43&page=";
 
-                int defaultPage = 100;
+                int defaultPage = 10;
 
                 for (int i = 1; i <= defaultPage; i++) {
                     driver.get(url+i);
@@ -63,15 +67,21 @@ public class TierListService {
                         Element ratingElement = row.select(".col-rating").first();
 
                         if (rankElement != null && battletagElement != null && ratingElement != null) {
-                            System.out.println("Rank: " + rankElement.text());
-                            System.out.println("Battletag: " + battletagElement.text());
-                            System.out.println("Rating: " + ratingElement.text());
+                            Long rank = Long.valueOf(rankElement.text());
+                            String battleTag = battletagElement.text();
+                            Double rating = Double.valueOf(ratingElement.text());
+
+                            System.out.println("Rank: " + rank);
+                            System.out.println("Battletag: " + battleTag);
+                            System.out.println("Rating: " + rating);
                             System.out.println("-------------");
 
-                            User user = new User();
-                            user.setUserRanking(Long.parseLong(rankElement.text()));
-                            user.setBattleTag(battletagElement.text());
-                            user.setAvgWins(Float.parseFloat(ratingElement.text()));
+                            User user = User.builder()
+                                    .userRanking(rank)
+                                    .battleTag(battleTag)
+                                    .avgWins(rating)
+                                    .build();
+
                             userRepository.save(user);
                         }
                     }
