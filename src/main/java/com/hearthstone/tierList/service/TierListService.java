@@ -1,17 +1,31 @@
 package com.hearthstone.tierList.service;
 
+import com.hearthstone.tierList.domain.User;
+import com.hearthstone.tierList.repository.UserRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+
 @Service
 public class TierListService {
 
+    @Autowired
+    UserRepository userRepository;
     public void callTierList() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\yuteacher\\Desktop\\chromedriver-win64\\chromedriver.exe"); // chromedriver 경로 설정
 
@@ -53,6 +67,12 @@ public class TierListService {
                             System.out.println("Battletag: " + battletagElement.text());
                             System.out.println("Rating: " + ratingElement.text());
                             System.out.println("-------------");
+
+                            User user = new User();
+                            user.setUserRanking(Long.parseLong(rankElement.text()));
+                            user.setBattleTag(battletagElement.text());
+                            user.setAvgWins(Float.parseFloat(ratingElement.text()));
+                            userRepository.save(user);
                         }
                     }
                 }
