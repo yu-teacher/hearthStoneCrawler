@@ -1,4 +1,4 @@
-package com.hearthstone.tierList;
+  package com.hearthstone.tierList;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
