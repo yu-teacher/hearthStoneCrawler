@@ -18,14 +18,13 @@ public class TierListController {
 
     @GetMapping("tierList")
     public ResponseEntity<Page<User>> allPages(
+            @RequestParam(name = "battleTag", required = false) String battleTag,
             @RequestParam(name = "pageNumber", required = false, defaultValue = "1") Integer pageNumber){
-        return new ResponseEntity<>(tierListService.allPages(pageNumber), HttpStatus.OK);
-    }
-
-    @GetMapping("tagSearch")
-    public ResponseEntity<Page<User>> tagSearch(
-            @RequestParam(name = "battleTag") String battleTag,
-            @RequestParam(name = "pageNumber", required = false, defaultValue = "1") Integer pageNumber){
+        if(battleTag == null){
+            return new ResponseEntity<>(tierListService.allPages(pageNumber), HttpStatus.OK);
+        }
         return new ResponseEntity<>(tierListService.searchTagUserData(battleTag,pageNumber),HttpStatus.OK);
     }
+
 }
+

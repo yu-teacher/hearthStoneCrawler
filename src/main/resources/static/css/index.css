@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.center {
+    text-align: center;
+}
+
+#search-container {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* 가장 아래로 위치하도록 조정 */
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* 가운데 정렬을 위해 추가 */
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+button {
+    color: #73685d;
+}
+
+.searchButton{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4285f4;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.searchButton:hover{
+    background-color: #3171e0;
+}
+
+table {
+    border: 1px #a39485 solid;
+    font-size: .9em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+    flex-direction: column; /* 세로 정렬을 위해 추가 */
+}
+
+th {
+    text-align: center;
+}
+
+thead {
+    font-weight: bold;
+    color: #fff;
+    background: #73685d;
+    text-align: center;
+}
+
+td, th {
+    padding: 1em .5em;
+    vertical-align: middle;
+}
+
+td {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    background: #fff;
+}
+
+/*@media all and (max-width: 768px) {*/
+/*    table, thead, tbody, th, td, tr {*/
+/*        display: block;*/
+/*    }*/
+
+/*    th {*/
+/*        text-align: right;*/
+/*    }*/
+
+/*    table {*/
+/*        position: relative;*/
+/*        padding-bottom: 0;*/
+/*        border: none;*/
+/*        box-shadow: 0 0 10px rgba(0, 0, 0, .2);*/
+/*    }*/
+
+/*    thead {*/
+/*        float: left;*/
+/*        white-space: nowrap;*/
+/*        text-align: center;*/
+/*    }*/
+
+/*    tbody {*/
+/*        overflow-x: auto;*/
+/*        overflow-y: hidden;*/
+/*        position: relative;*/
+/*        white-space: nowrap;*/
+/*    }*/
+
+/*    tr {*/
+/*        display: inline-block;*/
+/*        vertical-align: top;*/
+/*    }*/
+
+/*    th {*/
+/*        border-bottom: 1px solid #a39485;*/
+/*    }*/
+
+/*    td {*/
+/*        border-bottom: 1px solid #e5e5e5;*/
+/*    }*/
+/*}*/
+
+.navigation-bar {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navigation-item {
+    margin: 0 10px;
+}
+
+.navigation-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navigation-link:hover {
+    background-color: #ddd;
+}

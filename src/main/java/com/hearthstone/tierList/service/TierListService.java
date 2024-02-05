@@ -31,7 +31,7 @@ public class TierListService {
     }
 
     public void callTierList() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yuteacher\\Desktop\\chromedriver-win64\\chromedriver.exe"); // chromedriver 경로 설정
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver-win64\\chromedriver.exe"); // chromedriver 경로 설정
 
         try {
             WebDriver driver = new ChromeDriver();

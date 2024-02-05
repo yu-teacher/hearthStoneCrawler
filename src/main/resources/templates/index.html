@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 검색</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script src="/js/index.js"></script>
+</head>
+
+<body onload="roadPage();">
+
+<div class="center">
+    <table>
+        <thead>
+        <tr>
+            <th>순위</th>
+            <th>배틀태그</th>
+            <th>평균 승수</th>
+        </tr>
+        </thead>
+
+        <tbody class="ranking">
+
+        </tbody>
+    </table>
+
+    <ul class="navigation-bar">
+        <li class="navigation-item">
+            <button onclick ="pageMove(1);" class="navigation-link">1</button>
+        </li>
+        <li class="navigation-item">
+            <button onclick ="pageMove(2);" class="navigation-link">2</button>
+        </li>
+        <li class="navigation-item">
+            <button onclick ="pageMove(3);" class="navigation-link">3</button>
+        </li>
+        <li class="navigation-item">
+            <button onclick ="pageMove(4);" class="navigation-link">4</button>
+        </li>
+        <li class="navigation-item">
+            <button onclick ="pageMove(5);" class="navigation-link">5</button>
+        </li>
+    </ul>
+
+    <div id="search-container">
+        <div>
+            <input type="text" id="searchInput" placeholder="배틀태그를 입력하세요,">
+        </div>
+
+        <div>
+            <button onclick="searchGoogle();">검색</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
